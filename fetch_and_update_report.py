@@ -82,5 +82,23 @@ for task in tasks:
 
 report_content += """
 ## Risks and Issues
-| Risk/Issue        | Descriptio
+| Risk/Issue        | Description                                       | Mitigation Plan                              | Status     |
+|-------------------|---------------------------------------------------|---------------------------------------------|------------|
+| Risk/Issue 1      | Brief description of the risk/issue               | Plan to mitigate the risk or resolve issue  | Open/Closed|
+| Risk/Issue 2      | Brief description of the risk/issue               | Plan to mitigate the risk or resolve issue  | Open/Closed|
+
+## Decisions Made
+- Decision 1
+- Decision 2
+"""
+
+# Save the report to the status_updates folder
+report_filename = f'status_updates/status-report-{report_date}.md'
+with open(report_filename, 'w') as file:
+    file.write(report_content)
+
+# Commit and push the changes
+os.system('git add .')
+os.system(f'git commit -m "Add status report for week ending {report_date}"')
+os.system('git push')
 
