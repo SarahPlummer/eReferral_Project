@@ -4,6 +4,7 @@ from datetime import datetime
 
 # Replace with your details
 OWNER = 'NWMPHN-Data'
+REPO = 'eReferral_Project'
 PROJECT_ID = '24'
 TOKEN = os.getenv('GITHUB_TOKEN')
 
@@ -13,17 +14,24 @@ headers = {
 }
 
 # Fetch columns in the project board
-columns_url = f'https://api.github.com/orgs/{OWNER}/projects/{PROJECT_ID}/columns'
+columns_url = f'https://api.github.com/repos/{OWNER}/{REPO}/projects/{PROJECT_ID}/columns'
 columns_response = requests.get(columns_url, headers=headers)
+
+# Debug print to check the API response
+print("Columns Response:", columns_response.json())
+
+columns_response.raise_for_status()
 columns = columns_response.json()
 
 tasks = []
 
 # Fetch tasks in each column
 for column in columns:
+    print("Processing column:", column)  # Debug print
     column_id = column['id']
     cards_url = f'https://api.github.com/projects/columns/{column_id}/cards'
     cards_response = requests.get(cards_url, headers=headers)
+    cards_response.raise_for_status()
     cards = cards_response.json()
 
     for card in cards:
@@ -88,3 +96,4 @@ with open(report_filename, 'w') as file:
 os.system('git add .')
 os.system(f'git commit -m "Add status report for week ending {report_date}"')
 os.system('git push')
+
