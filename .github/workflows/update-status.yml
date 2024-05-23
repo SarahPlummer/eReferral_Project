@@ -1,28 +1,14 @@
-# this is a minor change to trigger recognition 
-name: Update Status Report
+name: Minimal Workflow
 
 on:
-  schedule:
-    - cron: '0 12 * * 5'  # Every Friday at 12:00 UTC
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
-  update-status:
+  hello-world:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies
-        run: pip install requests
-
-      - name: Fetch Project Data and Update Report
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          python fetch_and_update_report.py
+      - name: Hello World
+        run: echo "Hello, World!"
