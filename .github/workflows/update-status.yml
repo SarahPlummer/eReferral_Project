@@ -15,10 +15,10 @@ jobs:
           node-version: '20'
 
       - name: Checkout repository
-        uses: actions/checkout@v3  # Latest version
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v4  # Latest version
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
@@ -29,3 +29,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python fetch_and_update_report.py
+        
