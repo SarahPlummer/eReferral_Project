@@ -9,15 +9,13 @@ jobs:
   update-status:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          node-version: '20'
-
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
