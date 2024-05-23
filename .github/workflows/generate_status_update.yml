@@ -1,0 +1,35 @@
+name: Generate Status Update
+
+on:
+  schedule:
+    - cron: '0 12 * * FRI' # Every Friday at 12:00 UTC
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install PyGithub jinja2
+
+    - name: Generate Status Update
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN2 }}
+      run: python scripts/generate_status_update.py
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add status_update.md
+        git commit -m "Generated weekly status update"
+        git push
