@@ -1,14 +1,27 @@
-name: Minimal Workflow
+name: Update Status Report
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '0 12 * * 5'  # Every Friday at 12:00 UTC
   workflow_dispatch:
 
 jobs:
-  hello-world:
+  update-status:
     runs-on: ubuntu-latest
     steps:
-      - name: Hello World
-        run: echo "Hello, World!"
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch Project Data and Update Report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python fetch_and_update_report.py
