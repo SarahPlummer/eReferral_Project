@@ -3,8 +3,7 @@ import os
 from datetime import datetime
 
 # Replace with your details
-OWNER = 'NWMPHN-Data'
-REPO = 'eReferral_Project'
+ORG = 'NWMPHN-Data'
 PROJECT_ID = '24'
 TOKEN = os.getenv('GITHUB_TOKEN')
 
@@ -14,7 +13,7 @@ headers = {
 }
 
 # Fetch columns in the project board
-columns_url = f'https://api.github.com/repos/{OWNER}/{REPO}/projects/{PROJECT_ID}/columns'
+columns_url = f'https://api.github.com/orgs/{ORG}/projects/{PROJECT_ID}/columns'
 columns_response = requests.get(columns_url, headers=headers)
 
 # Debug print to check the API response
