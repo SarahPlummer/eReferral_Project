@@ -5,7 +5,7 @@ from datetime import datetime
 # Replace with your details
 ORG = 'NWMPHN-Data'
 PROJECT_ID = '24'
-TOKEN = os.getenv('GITHUB_TOKEN')
+TOKEN = os.getenv('TOKEN2')
 
 headers = {
     'Authorization': f'token {TOKEN}',
