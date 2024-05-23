@@ -9,7 +9,7 @@ jobs:
   update-status:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Node.js 20
+      - name: Setup Node.js 20
         uses: actions/setup-node@v3
         with:
           node-version: '20'
